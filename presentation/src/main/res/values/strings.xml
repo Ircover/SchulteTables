@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">SchulteTables</string>
+    <string name="settings">Settings</string>
+    <string name="columns_count">Columns count</string>
+    <string name="rows_count">Rows count</string>
+    <string name="expected_cell_title">Expected value:</string>
+</resources>
