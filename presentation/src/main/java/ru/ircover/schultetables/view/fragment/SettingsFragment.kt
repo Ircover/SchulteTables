@@ -5,13 +5,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import moxy.MvpAppCompatFragment
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
-import ru.ircover.schultetables.databinding.FragmentGameBinding
 import ru.ircover.schultetables.databinding.FragmentSettingsBinding
-import ru.ircover.schultetables.presenter.GamePresenter
 import ru.ircover.schultetables.presenter.SettingsPresenter
 import ru.ircover.schultetables.presenter.SettingsView
 import ru.ircover.schultetables.util.getApplicationComponent

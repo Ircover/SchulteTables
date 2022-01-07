@@ -5,9 +5,11 @@ import android.os.Build
 import android.os.VibrationEffect
 import android.os.Vibrator
 import android.os.VibratorManager
+import ru.ircover.schultetables.util.di.PresentationComponentProvider
 
-fun Context.getComponent() = (applicationContext as SchulteTableApp).applicationComponent
+fun Context.getComponent() = (applicationContext as PresentationComponentProvider).get()
 
+@Suppress("DEPRECATION")
 fun Context.vibrateDevice() {
     val vibrator = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
         val vibratorManager = getSystemService(Context.VIBRATOR_MANAGER_SERVICE) as VibratorManager

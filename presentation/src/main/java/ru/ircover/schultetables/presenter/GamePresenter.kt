@@ -7,6 +7,7 @@ import moxy.MvpView
 import moxy.presenterScope
 import moxy.viewstate.strategy.alias.AddToEndSingle
 import moxy.viewstate.strategy.alias.OneExecution
+import ru.ircover.schultetables.ActivityScope
 import ru.ircover.schultetables.domain.*
 import ru.ircover.schultetables.domain.usecase.ClickCellUseCase
 import ru.ircover.schultetables.domain.usecase.GenerateTableUseCase
@@ -28,6 +29,7 @@ interface GameView : MvpView {
 }
 
 @InjectViewState
+@ActivityScope
 class GamePresenter @Inject constructor(private val game: SchulteTableGame,
                                         private val generateTableUseCase: GenerateTableUseCase,
                                         private val settingsWorker: SchulteTableSettingsWorker,

@@ -3,7 +3,7 @@ buildscript {
     ext.moxy_version = "2.2.2"
     ext.nav_version = "2.3.5"
     ext.coroutines_version = "1.5.2"
-    ext.dagger_version = "2.39.1"
+    ext.dagger_version = '2.40.5'
     repositories {
         google()
         mavenCentral()
@@ -11,6 +11,7 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:7.0.4'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.10"
+        classpath "org.jetbrains.kotlin:kotlin-stdlib:1.6.10"
         classpath "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
     }
 }

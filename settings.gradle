@@ -3,9 +3,10 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        jcenter() // Warning: this repository is going to shut down soon
     }
 }
 rootProject.name = "SchulteTables"
 include ':presentation'
 include ':domain'
+include ':app'
+include ':utils'

@@ -10,13 +10,13 @@ import javax.inject.Singleton
 @Module
 class PresentationModule(private val application: Application) {
 
-    @Singleton
+    //@Singleton
     @Provides
     fun provideContext(): Context {
         return application.applicationContext
     }
 
-    @Singleton
+    //@Singleton
     @Provides
     fun provideGson(): Gson {
         return Gson()

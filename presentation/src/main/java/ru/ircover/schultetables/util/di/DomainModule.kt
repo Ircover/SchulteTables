@@ -16,7 +16,7 @@ class DomainModule {
     @Provides
     fun provideSchulteTableGame(): SchulteTableGame = SchulteTableGameImpl()
 
-    @Singleton
+    //@Singleton
     @Provides
     fun provideSchulteTableSettingsWorker(context: Context, gson: Gson): SchulteTableSettingsWorker =
         SchulteTableSettingsWorkerImpl(context, gson)

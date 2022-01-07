@@ -6,6 +6,7 @@ import moxy.MvpPresenter
 import moxy.MvpView
 import moxy.presenterScope
 import moxy.viewstate.strategy.alias.OneExecution
+import ru.ircover.schultetables.ActivityScope
 import ru.ircover.schultetables.domain.SchulteTableSettingsWorker
 import ru.ircover.schultetables.domain.SettingType
 import ru.ircover.schultetables.util.DispatchersProvider
@@ -26,6 +27,7 @@ private const val MIN_COLUMNS_COUNT = 4
 private const val MIN_ROWS_COUNT = 4
 
 @InjectViewState
+@ActivityScope
 class SettingsPresenter @Inject constructor(private val settingsWorker: SchulteTableSettingsWorker,
                                             private val dispatchersProvider: DispatchersProvider)
     : MvpPresenter<SettingsView>() {
