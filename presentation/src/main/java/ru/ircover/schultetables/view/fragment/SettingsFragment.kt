@@ -11,7 +11,7 @@ import moxy.presenter.ProvidePresenter
 import ru.ircover.schultetables.databinding.FragmentSettingsBinding
 import ru.ircover.schultetables.presenter.SettingsPresenter
 import ru.ircover.schultetables.presenter.SettingsView
-import ru.ircover.schultetables.util.getApplicationComponent
+import ru.ircover.schultetables.util.getPresentationComponent
 import ru.ircover.schultetables.util.setOnSeekBarChangeListener
 import javax.inject.Inject
 
@@ -29,7 +29,7 @@ class SettingsFragment : MvpAppCompatFragment(), SettingsView {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        getApplicationComponent().inject(this)
+        getPresentationComponent()!!.inject(this)
     }
 
     override fun onCreateView(

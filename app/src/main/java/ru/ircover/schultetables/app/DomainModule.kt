@@ -1,4 +1,4 @@
-package ru.ircover.schultetables.util.di
+package ru.ircover.schultetables.app
 
 import android.content.Context
 import com.google.gson.Gson
@@ -16,7 +16,7 @@ class DomainModule {
     @Provides
     fun provideSchulteTableGame(): SchulteTableGame = SchulteTableGameImpl()
 
-    //@Singleton
+    @Singleton
     @Provides
     fun provideSchulteTableSettingsWorker(context: Context, gson: Gson): SchulteTableSettingsWorker =
         SchulteTableSettingsWorkerImpl(context, gson)

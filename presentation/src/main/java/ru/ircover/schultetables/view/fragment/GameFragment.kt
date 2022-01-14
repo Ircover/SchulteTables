@@ -16,7 +16,7 @@ import moxy.presenter.InjectPresenter
 import ru.ircover.schultetables.domain.Matrix2D
 import ru.ircover.schultetables.domain.SchulteTableCallback
 import ru.ircover.schultetables.domain.SchulteTableCell
-import ru.ircover.schultetables.util.getApplicationComponent
+import ru.ircover.schultetables.util.getPresentationComponent
 import ru.ircover.schultetables.util.vibrateDevice
 import javax.inject.Inject
 
@@ -34,7 +34,7 @@ class GameFragment : MvpAppCompatFragment(), GameView {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        getApplicationComponent().inject(this)
+        getPresentationComponent()!!.inject(this)
     }
 
     override fun onCreateView(
