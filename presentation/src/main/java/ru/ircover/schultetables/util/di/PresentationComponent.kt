@@ -2,8 +2,8 @@ package ru.ircover.schultetables.util.di
 
 import dagger.Subcomponent
 import ru.ircover.schultetables.ActivityScope
-import ru.ircover.schultetables.view.fragment.GameFragment
-import ru.ircover.schultetables.view.fragment.SettingsFragment
+import ru.ircover.schultetables.main.view.GameFragment
+import ru.ircover.schultetables.main.view.SettingsFragment
 
 @ActivityScope
 @Subcomponent

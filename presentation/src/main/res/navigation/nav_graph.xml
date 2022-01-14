@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/navGameFragment"
-        android:name="ru.ircover.schultetables.view.fragment.GameFragment"
+        android:name="ru.ircover.schultetables.main.view.GameFragment"
         android:label="GameFragment" >
         <action
             android:id="@+id/action_navGameFragment_to_settingsFragment"
@@ -15,6 +15,6 @@
 
     <fragment
         android:id="@+id/navSettingsFragment"
-        android:name="ru.ircover.schultetables.view.fragment.SettingsFragment"
+        android:name="ru.ircover.schultetables.main.view.SettingsFragment"
         android:label="SettingsFragment" />
 </navigation>

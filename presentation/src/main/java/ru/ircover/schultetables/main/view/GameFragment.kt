@@ -1,4 +1,4 @@
-package ru.ircover.schultetables.view.fragment
+package ru.ircover.schultetables.main.view
 
 import android.content.Context
 import android.os.Bundle
@@ -9,8 +9,8 @@ import androidx.navigation.fragment.findNavController
 import moxy.MvpAppCompatFragment
 import ru.ircover.schultetables.R
 import ru.ircover.schultetables.databinding.FragmentGameBinding
-import ru.ircover.schultetables.presenter.GamePresenter
-import ru.ircover.schultetables.presenter.GameView
+import ru.ircover.schultetables.main.presenter.GamePresenter
+import ru.ircover.schultetables.main.presenter.GameView
 import moxy.presenter.ProvidePresenter
 import moxy.presenter.InjectPresenter
 import ru.ircover.schultetables.domain.Matrix2D

@@ -1,4 +1,4 @@
-package ru.ircover.schultetables.presenter
+package ru.ircover.schultetables.main.presenter
 
 import kotlinx.coroutines.launch
 import moxy.InjectViewState

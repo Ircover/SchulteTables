@@ -1,4 +1,4 @@
-package ru.ircover.schultetables.view.customview
+package ru.ircover.schultetables.customview
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -59,7 +59,8 @@ class SchulteTableView @JvmOverloads constructor(
             val expectedWidth = (height * ratio).toInt()
             if(expectedWidth != width) {
                 if (expectedWidth > width && widthMode != MeasureSpec.UNSPECIFIED
-                        || heightMode == MeasureSpec.UNSPECIFIED) {
+                        || heightMode == MeasureSpec.UNSPECIFIED
+                ) {
                     height = (width / ratio).toInt()
                     width = (height * ratio).toInt()//чтобы сгладить косяки округления
                 } else {
@@ -68,7 +69,8 @@ class SchulteTableView @JvmOverloads constructor(
             }
             setMeasuredDimension(
                 MeasureSpec.makeMeasureSpec(width, MeasureSpec.EXACTLY),
-                MeasureSpec.makeMeasureSpec(height, MeasureSpec.EXACTLY))
+                MeasureSpec.makeMeasureSpec(height, MeasureSpec.EXACTLY)
+            )
         }
     }
 

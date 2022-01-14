@@ -41,7 +41,7 @@
         app:layout_constraintStart_toEndOf="@id/tvExpectedCellTitle"
         app:layout_constraintBottom_toBottomOf="@id/tvExpectedCellTitle"/>
 
-    <ru.ircover.schultetables.view.customview.SchulteTableView
+    <ru.ircover.schultetables.customview.SchulteTableView
         android:id="@+id/stMain"
         android:layout_width="0dp"
         android:layout_height="0dp"

@@ -1,4 +1,4 @@
-package ru.ircover.schultetables.view.fragment
+package ru.ircover.schultetables.main.view
 
 import android.content.Context
 import android.os.Bundle
@@ -9,8 +9,8 @@ import moxy.MvpAppCompatFragment
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 import ru.ircover.schultetables.databinding.FragmentSettingsBinding
-import ru.ircover.schultetables.presenter.SettingsPresenter
-import ru.ircover.schultetables.presenter.SettingsView
+import ru.ircover.schultetables.main.presenter.SettingsPresenter
+import ru.ircover.schultetables.main.presenter.SettingsView
 import ru.ircover.schultetables.util.getPresentationComponent
 import ru.ircover.schultetables.util.setOnSeekBarChangeListener
 import javax.inject.Inject

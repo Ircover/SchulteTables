@@ -1,4 +1,4 @@
-package ru.ircover.schultetables.view.activity
+package ru.ircover.schultetables.main.view
 
 import android.os.Bundle
 import moxy.MvpAppCompatActivity
