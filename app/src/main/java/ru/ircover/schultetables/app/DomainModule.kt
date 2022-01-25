@@ -4,6 +4,7 @@ import android.content.Context
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
+import ru.ircover.schultetables.TimeManager
 import ru.ircover.schultetables.domain.*
 import ru.ircover.schultetables.domain.usecase.*
 import ru.ircover.schultetables.util.DispatchersProvider
@@ -23,8 +24,9 @@ class DomainModule {
 
     @Provides
     fun provideGenerateTableUseCase(settingsWorker: SchulteTableSettingsWorker,
-                                    generateCellsOrderedListUseCase: GenerateCellsOrderedListUseCase): GenerateTableUseCase =
-        GenerateTableUseCaseImpl(settingsWorker, generateCellsOrderedListUseCase)
+                                    generateCellsOrderedListUseCase: GenerateCellsOrderedListUseCase,
+                                    timeManager: TimeManager): GenerateTableUseCase =
+        GenerateTableUseCaseImpl(settingsWorker, generateCellsOrderedListUseCase, timeManager)
 
     @Provides
     fun provideClickCellUseCase(): ClickCellUseCase =
@@ -37,4 +39,10 @@ class DomainModule {
     @Provides
     fun provideDispatchersProvider(): DispatchersProvider =
         DispatchersProviderImpl()
+
+    @Provides
+    fun provideSaveResultUseCase(timeManager: TimeManager,
+                                 repository: SchulteTableScoresRepository,
+                                 settingsWorker: SchulteTableSettingsWorker): SaveResultUseCase =
+        SaveResultUseCaseImpl(timeManager, repository, settingsWorker)
 }

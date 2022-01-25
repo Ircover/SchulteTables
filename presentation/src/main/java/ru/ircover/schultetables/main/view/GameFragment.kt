@@ -73,4 +73,8 @@ class GameFragment : MvpAppCompatFragment(), GameView {
     override fun notifyWrongCell() {
         context?.vibrateDevice()
     }
+
+    override fun openScoresList() {
+        findNavController().navigate(R.id.navScoresFragment)
+    }
 }

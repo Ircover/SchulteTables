@@ -55,7 +55,7 @@ class ClickCellUseCaseImplTest {
     }
 
     @Test
-    fun execute_LastCell() = runBlockingTest {
+    fun execute_lastCell() = runBlockingTest {
         val game = mock<SchulteTableGame>()
         val clickCell = getCell(4)
         `when`(game.getCurrentExpectedCell()).thenReturn(getCell(4))

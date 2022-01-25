@@ -4,4 +4,6 @@
     <string name="columns_count">Columns count</string>
     <string name="rows_count">Rows count</string>
     <string name="expected_cell_title">Expected value:</string>
+    <string name="score_duration">%1$.1f seconds</string>
+    <string name="high_scores">High scores</string>
 </resources>

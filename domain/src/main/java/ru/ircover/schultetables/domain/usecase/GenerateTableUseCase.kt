@@ -1,5 +1,6 @@
 package ru.ircover.schultetables.domain.usecase
 
+import ru.ircover.schultetables.TimeManager
 import ru.ircover.schultetables.domain.Matrix2D
 import ru.ircover.schultetables.domain.SchulteTableSettingsWorker
 import ru.ircover.schultetables.domain.SchulteTableStartData
@@ -10,7 +11,9 @@ interface GenerateTableUseCase {
 }
 
 class GenerateTableUseCaseImpl(private val settingsWorker: SchulteTableSettingsWorker,
-                               private val generateCellsOrderedListUseCase: GenerateCellsOrderedListUseCase) : GenerateTableUseCase {
+                               private val generateCellsOrderedListUseCase: GenerateCellsOrderedListUseCase,
+                               private val timeManager: TimeManager
+) : GenerateTableUseCase {
     override fun execute(): SchulteTableStartData {
         val settings = settingsWorker.get()
         val cellsList = generateCellsOrderedListUseCase.execute(settings).toMutableList()
@@ -21,6 +24,6 @@ class GenerateTableUseCaseImpl(private val settingsWorker: SchulteTableSettingsW
                 cellsList.removeAt(cellIndex)
             }
         }
-        return SchulteTableStartData(Matrix2D(result), startCell)
+        return SchulteTableStartData(Matrix2D(result), startCell, timeManager.getNowMillis())
     }
 }

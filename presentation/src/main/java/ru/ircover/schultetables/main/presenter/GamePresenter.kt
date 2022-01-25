@@ -11,6 +11,7 @@ import ru.ircover.schultetables.ActivityScope
 import ru.ircover.schultetables.domain.*
 import ru.ircover.schultetables.domain.usecase.ClickCellUseCase
 import ru.ircover.schultetables.domain.usecase.GenerateTableUseCase
+import ru.ircover.schultetables.domain.usecase.SaveResultUseCase
 import ru.ircover.schultetables.util.DispatchersProvider
 import ru.ircover.schultetables.util.launchCollect
 import javax.inject.Inject
@@ -26,16 +27,18 @@ interface GameView : MvpView {
     fun setCallback(callback: SchulteTableCallback)
     @OneExecution
     fun notifyWrongCell()
+    @OneExecution
+    fun openScoresList()
 }
 
 @InjectViewState
-@ActivityScope
+//@ActivityScope
 class GamePresenter @Inject constructor(private val game: SchulteTableGame,
                                         private val generateTableUseCase: GenerateTableUseCase,
                                         private val settingsWorker: SchulteTableSettingsWorker,
                                         private val clickCellUseCase: ClickCellUseCase,
-                                        dispatchersProvider: DispatchersProvider
-)
+                                        private val saveResultUseCase: SaveResultUseCase,
+                                        dispatchersProvider: DispatchersProvider)
         : MvpPresenter<GameView>(), SchulteTableCallback {
     private var needToRefresh = true
     init {
@@ -51,8 +54,10 @@ class GamePresenter @Inject constructor(private val game: SchulteTableGame,
                     SettingType.ColumnsCount, SettingType.RowsCount -> needToRefresh = true
                 }
             }
-            launchCollect(game.getFinishEvents()) {
-                refreshGame()
+            launchCollect(game.getFinishEvents()) { startTimeMillis ->
+                needToRefresh = true
+                saveResultUseCase.execute(startTimeMillis)
+                viewState.openScoresList()
             }
         }
     }
@@ -72,8 +77,8 @@ class GamePresenter @Inject constructor(private val game: SchulteTableGame,
     fun onResume() {
         if(needToRefresh) {
             refreshGame()
+            needToRefresh = false
         }
-        needToRefresh = false
     }
 
     override fun click(cell: SchulteTableCell) {

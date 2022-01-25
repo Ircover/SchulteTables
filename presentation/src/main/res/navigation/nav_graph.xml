@@ -11,10 +11,18 @@
         <action
             android:id="@+id/action_navGameFragment_to_settingsFragment"
             app:destination="@id/navSettingsFragment" />
+        <action
+            android:id="@+id/action_navGameFragment_to_scoresFragment"
+            app:destination="@id/navScoresFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/navSettingsFragment"
         android:name="ru.ircover.schultetables.main.view.SettingsFragment"
         android:label="SettingsFragment" />
+
+    <fragment
+        android:id="@+id/navScoresFragment"
+        android:name="ru.ircover.schultetables.main.view.ScoresFragment"
+        android:label="ScoresFragment" />
 </navigation>

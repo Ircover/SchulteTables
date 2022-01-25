@@ -9,8 +9,9 @@ java {
 }
 
 dependencies {
+    implementation project(path: ':utils')
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
-    testImplementation 'junit:junit:4.13.2'
-    testImplementation "org.mockito.kotlin:mockito-kotlin:4.0.0"
+    testImplementation "junit:junit:$junit_version"
+    testImplementation "org.mockito.kotlin:mockito-kotlin:$mockito_version"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version"
 }

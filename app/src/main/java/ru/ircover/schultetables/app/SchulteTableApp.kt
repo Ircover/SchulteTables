@@ -9,7 +9,7 @@ import ru.ircover.schultetables.util.di.PresentationComponentProvider
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [DomainModule::class, PresentationModule::class])
+@Component(modules = [DomainModule::class, PresentationModule::class, UtilsModule::class, DataModule::class])
 interface ApplicationComponent {
     fun getPresentationComponentFactory(): PresentationComponent.Factory
 

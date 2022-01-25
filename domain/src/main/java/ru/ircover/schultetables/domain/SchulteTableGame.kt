@@ -10,18 +10,19 @@ interface SchulteTableGame {
     fun getCurrentCells(): Matrix2D<SchulteTableCell>
     fun getExpectedCell(): Flow<SchulteTableCell>
     fun getCurrentExpectedCell(): SchulteTableCell
-    fun getFinishEvents(): Flow<Unit>
+    fun getFinishEvents(): Flow<Long>
     suspend fun refresh(data: SchulteTableStartData)
     suspend fun setExpectedCell(cell: SchulteTableCell)
     suspend fun finish()
 }
 
 class SchulteTableGameImpl : SchulteTableGame {
+    private var startTimeMillis = 0L
     private val matrix: MutableStateFlow<Matrix2D<SchulteTableCell>> =
         MutableStateFlow(Matrix2D.empty())
     private val expectedCell: MutableStateFlow<SchulteTableCell> =
             MutableStateFlow(SchulteTableCell.EMPTY)
-    private val finishEvent: MutableSharedFlow<Unit> =
+    private val finishEvent: MutableSharedFlow<Long> =
         MutableSharedFlow(replay = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
 
     override fun getCells(): Flow<Matrix2D<SchulteTableCell>> = matrix
@@ -30,9 +31,10 @@ class SchulteTableGameImpl : SchulteTableGame {
     override fun getExpectedCell(): Flow<SchulteTableCell> = expectedCell
     override fun getCurrentExpectedCell() = expectedCell.value
 
-    override fun getFinishEvents(): Flow<Unit> = finishEvent
+    override fun getFinishEvents(): Flow<Long> = finishEvent
 
     override suspend fun refresh(data: SchulteTableStartData) {
+        startTimeMillis = data.startTimeMillis
         matrix.emit(data.matrix)
         expectedCell.emit(data.startCell)
     }
@@ -42,6 +44,6 @@ class SchulteTableGameImpl : SchulteTableGame {
     }
 
     override suspend fun finish() {
-        finishEvent.emit(Unit)
+        finishEvent.emit(startTimeMillis)
     }
 }
