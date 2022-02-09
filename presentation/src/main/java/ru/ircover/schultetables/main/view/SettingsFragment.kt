@@ -16,7 +16,7 @@ import ru.ircover.schultetables.util.setOnSeekBarChangeListener
 import javax.inject.Inject
 
 class SettingsFragment : MvpAppCompatFragment(), SettingsView {
-    private lateinit var binding: FragmentSettingsBinding
+    private var binding: FragmentSettingsBinding? = null
 
     @Inject
     @InjectPresenter
@@ -37,29 +37,35 @@ class SettingsFragment : MvpAppCompatFragment(), SettingsView {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentSettingsBinding.inflate(inflater)
-        binding.sbColumnsCount.setOnSeekBarChangeListener {
-            presenter.setColumnsCountProgress(it)
-        }
-        binding.sbRowsCount.setOnSeekBarChangeListener {
-            presenter.setRowsCountProgress(it)
-        }
-        presenter.initView()
-        return binding.root
+        return FragmentSettingsBinding.inflate(inflater).apply {
+            binding = this
+            sbColumnsCount.setOnSeekBarChangeListener {
+                presenter.setColumnsCountProgress(it)
+            }
+            sbRowsCount.setOnSeekBarChangeListener {
+                presenter.setRowsCountProgress(it)
+            }
+            presenter.initView()
+        }.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
     }
 
     override fun setMaxSizePositions(maxColumnsPositions: Int, maxRowsPositions: Int) {
-        binding.sbColumnsCount.max = maxColumnsPositions
-        binding.sbRowsCount.max = maxRowsPositions
+        binding?.sbColumnsCount?.max = maxColumnsPositions
+        binding?.sbRowsCount?.max = maxRowsPositions
     }
 
     override fun setColumnsCount(progress: Int, count: Int) {
-        binding.sbColumnsCount.progress = progress
-        binding.tvColumnsCount.text = count.toString()
+        binding?.sbColumnsCount?.progress = progress
+        binding?.tvColumnsCount?.text = count.toString()
     }
 
     override fun setRowsCount(progress: Int, count: Int) {
-        binding.sbRowsCount.progress = progress
-        binding.tvRowsCount.text = count.toString()
+        binding?.sbRowsCount?.progress = progress
+        binding?.tvRowsCount?.text = count.toString()
     }
 }

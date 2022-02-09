@@ -18,7 +18,7 @@ import ru.ircover.schultetables.util.getPresentationComponent
 import javax.inject.Inject
 
 class ScoresFragment : MvpAppCompatFragment(), ScoresView {
-    private lateinit var binding: FragmentScoresBinding
+    private var binding: FragmentScoresBinding? = null
     private val scoresAdapter = ScoresAdapter()
 
     @Inject
@@ -41,14 +41,25 @@ class ScoresFragment : MvpAppCompatFragment(), ScoresView {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentScoresBinding.inflate(inflater)
-        binding.rvScores.apply {
-            layoutManager = LinearLayoutManager(inflater.context, LinearLayoutManager.VERTICAL, false)
-            adapter = scoresAdapter
-        }
-        return binding.root
+        return FragmentScoresBinding.inflate(inflater).apply {
+            binding = this
+            rvScores.apply {
+                layoutManager = LinearLayoutManager(inflater.context, LinearLayoutManager.VERTICAL, false)
+                adapter = scoresAdapter
+            }
+        }.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
     }
 
     override fun setScores(scores: List<SchulteTableScore>) {
         scoresAdapter.submitList(scores)
+    }
+
+    override fun setSettingsValue(value: String) {
+        binding?.tvSettingsValue?.text = value
     }
 }

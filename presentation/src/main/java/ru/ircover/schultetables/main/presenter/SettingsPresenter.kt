@@ -27,7 +27,7 @@ private const val MIN_COLUMNS_COUNT = 4
 private const val MIN_ROWS_COUNT = 4
 
 @InjectViewState
-//@ActivityScope
+@ActivityScope
 class SettingsPresenter @Inject constructor(private val settingsWorker: SchulteTableSettingsWorker,
                                             private val dispatchersProvider: DispatchersProvider)
     : MvpPresenter<SettingsView>() {

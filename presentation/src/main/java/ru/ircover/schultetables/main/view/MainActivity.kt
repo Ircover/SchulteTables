@@ -8,13 +8,10 @@ import ru.ircover.schultetables.util.di.PresentationComponentProvider
 import ru.ircover.schultetables.util.getApplicationPresentationComponent
 
 class MainActivity : MvpAppCompatActivity(), PresentationComponentProvider {
-    private val presentationComponent: PresentationComponent
-        by lazy { getApplicationPresentationComponent() }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
     }
 
-    override fun get(): PresentationComponent = presentationComponent
+    override fun get(): PresentationComponent = getApplicationPresentationComponent()
 }

@@ -21,7 +21,7 @@ import ru.ircover.schultetables.util.vibrateDevice
 import javax.inject.Inject
 
 class GameFragment : MvpAppCompatFragment(), GameView {
-    private lateinit var binding: FragmentGameBinding
+    private var binding: FragmentGameBinding? = null
 
     @Inject
     @InjectPresenter
@@ -42,11 +42,12 @@ class GameFragment : MvpAppCompatFragment(), GameView {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentGameBinding.inflate(inflater)
-        binding.bSettings.setOnClickListener { presenter.clickSettings() }
-        binding.bRefresh.setOnClickListener { presenter.clickRefresh() }
-        presenter.initView()
-        return binding.root
+        return FragmentGameBinding.inflate(inflater).apply {
+            binding = this
+            bSettings.setOnClickListener { presenter.clickSettings() }
+            bRefresh.setOnClickListener { presenter.clickRefresh() }
+            presenter.initView()
+        }.root
     }
 
     override fun onResume() {
@@ -54,20 +55,25 @@ class GameFragment : MvpAppCompatFragment(), GameView {
         presenter.onResume()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
+    }
+
     override fun openSettings() {
         findNavController().navigate(R.id.navSettingsFragment)
     }
 
     override fun showCells(cells: Matrix2D<SchulteTableCell>) {
-        binding.stMain.setCells(cells)
+        binding?.stMain?.setCells(cells)
     }
 
     override fun setExpectedCellText(text: String) {
-        binding.tvExpectedCellValue.text = text
+        binding?.tvExpectedCellValue?.text = text
     }
 
     override fun setCallback(callback: SchulteTableCallback) {
-        binding.stMain.setCallback(callback)
+        binding?.stMain?.setCallback(callback)
     }
 
     override fun notifyWrongCell() {

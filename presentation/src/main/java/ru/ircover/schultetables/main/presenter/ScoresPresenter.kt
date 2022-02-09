@@ -17,10 +17,12 @@ import javax.inject.Inject
 interface ScoresView : MvpView {
     @AddToEndSingle
     fun setScores(scores: List<SchulteTableScore>)
+    @AddToEndSingle
+    fun setSettingsValue(value: String)
 }
 
 @InjectViewState
-//@ActivityScope
+@ActivityScope
 class ScoresPresenter @Inject constructor(private val scoresRepository: SchulteTableScoresRepository,
                                           private val settingsWorker: SchulteTableSettingsWorker,
                                           private val dispatchersProvider: DispatchersProvider
@@ -33,10 +35,15 @@ class ScoresPresenter @Inject constructor(private val scoresRepository: SchulteT
                 loadScores()
             }
         }
+        viewState.setSettingsValue(getSettingsValue())
     }
 
     private suspend fun loadScores() {
         val scores = scoresRepository.getTop10(settingsWorker.get())
         viewState.setScores(scores)
+    }
+
+    private fun getSettingsValue() = settingsWorker.get().let { settings ->
+        "${settings.columnsCount}x${settings.rowsCount}"
     }
 }

@@ -32,7 +32,7 @@ interface GameView : MvpView {
 }
 
 @InjectViewState
-//@ActivityScope
+@ActivityScope
 class GamePresenter @Inject constructor(private val game: SchulteTableGame,
                                         private val generateTableUseCase: GenerateTableUseCase,
                                         private val settingsWorker: SchulteTableSettingsWorker,
