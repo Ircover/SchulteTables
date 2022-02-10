@@ -1,9 +1,9 @@
 package ru.ircover.schultetables.app
 
 import android.content.Context
-import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
+import ru.ircover.schultetables.Serializer
 import ru.ircover.schultetables.TimeManager
 import ru.ircover.schultetables.domain.*
 import ru.ircover.schultetables.domain.usecase.*
@@ -19,8 +19,8 @@ class DomainModule {
 
     @Singleton
     @Provides
-    fun provideSchulteTableSettingsWorker(context: Context, gson: Gson): SchulteTableSettingsWorker =
-        SchulteTableSettingsWorkerImpl(context, gson)
+    fun provideSchulteTableSettingsWorker(context: Context, serializer: Serializer): SchulteTableSettingsWorker =
+        SchulteTableSettingsWorkerImpl(context, serializer)
 
     @Provides
     fun provideGenerateTableUseCase(settingsWorker: SchulteTableSettingsWorker,

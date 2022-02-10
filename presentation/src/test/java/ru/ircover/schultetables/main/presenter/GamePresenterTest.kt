@@ -12,6 +12,7 @@ import ru.ircover.schultetables.domain.SchulteTableGame
 import ru.ircover.schultetables.domain.SchulteTableSettingsWorker
 import ru.ircover.schultetables.domain.usecase.ClickCellUseCase
 import ru.ircover.schultetables.domain.usecase.GenerateTableUseCase
+import ru.ircover.schultetables.domain.usecase.SaveResultUseCase
 import ru.ircover.schultetables.utils.TestDispatchersProvider
 
 @ExperimentalCoroutinesApi
@@ -24,6 +25,7 @@ class GamePresenterTest {
     private lateinit var generateTableUseCase: GenerateTableUseCase
     private lateinit var settingsWorker: SchulteTableSettingsWorker
     private lateinit var clickCellUseCase: ClickCellUseCase
+    private lateinit var saveResultUseCase: SaveResultUseCase
 
     @Before
     fun setup() {
@@ -32,13 +34,14 @@ class GamePresenterTest {
         generateTableUseCase = mock()
         settingsWorker = mock()
         clickCellUseCase = mock()
+        saveResultUseCase = mock()
 
         `when`(game.getCells()).thenReturn(emptyFlow())
         `when`(game.getExpectedCell()).thenReturn(emptyFlow())
         `when`(settingsWorker.getChanges()).thenReturn(emptyFlow())
         `when`(game.getFinishEvents()).thenReturn(emptyFlow())
 
-        sut = GamePresenter(game, generateTableUseCase, settingsWorker, clickCellUseCase,
+        sut = GamePresenter(game, generateTableUseCase, settingsWorker, clickCellUseCase, saveResultUseCase,
             TestDispatchersProvider(testCoroutineDispatcher)
         ).apply {
             attachView(view)

@@ -2,9 +2,9 @@ package ru.ircover.schultetables.app
 
 import android.content.Context
 import androidx.room.Room
-import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
+import ru.ircover.schultetables.Serializer
 import ru.ircover.schultetables.data.*
 import ru.ircover.schultetables.domain.SchulteTableScoresRepository
 import javax.inject.Singleton
@@ -32,5 +32,5 @@ class DataModule {
 
     @Singleton
     @Provides
-    fun provideScoreMapper(gson: Gson): ScoreMapper = ScoreMapperImpl(gson)
+    fun provideScoreMapper(serializer: Serializer): ScoreMapper = ScoreMapperImpl(serializer)
 }

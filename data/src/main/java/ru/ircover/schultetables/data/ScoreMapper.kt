@@ -1,7 +1,8 @@
 package ru.ircover.schultetables.data
 
-import com.google.gson.Gson
+import ru.ircover.schultetables.Serializer
 import ru.ircover.schultetables.dateFromMillis
+import ru.ircover.schultetables.deserialize
 import ru.ircover.schultetables.domain.SchulteTableScore
 import ru.ircover.schultetables.domain.SchulteTableSettings
 
@@ -12,7 +13,7 @@ interface ScoreMapper {
     fun mapSettings(settings: String): SchulteTableSettings
 }
 
-class ScoreMapperImpl(private val gson: Gson): ScoreMapper {
+class ScoreMapperImpl(private val serializer: Serializer): ScoreMapper {
     override fun map(score: Score) = SchulteTableScore(
         score.duration,
         mapSettings(score.settings),
@@ -27,9 +28,9 @@ class ScoreMapperImpl(private val gson: Gson): ScoreMapper {
     )
 
     override fun mapSettings(settings: SchulteTableSettings): String =
-        gson.toJson(settings)
+        serializer.serialize(settings)
 
     override fun mapSettings(settings: String): SchulteTableSettings =
-        gson.fromJson(settings, SchulteTableSettings::class.java)
+        serializer.deserialize(settings)
 
 }
