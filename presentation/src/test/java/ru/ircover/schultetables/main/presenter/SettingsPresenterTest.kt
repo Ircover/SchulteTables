@@ -18,7 +18,7 @@ import ru.ircover.schultetables.utils.TestDispatchersProvider
 @ExperimentalCoroutinesApi
 class SettingsPresenterTest {
     private val testCoroutineDispatcher = TestCoroutineDispatcher()
-    private val settings = SchulteTableSettings(5, 5)
+    private val settings = SchulteTableSettings(4, 5)
 
     private lateinit var sut: SettingsPresenter
     private lateinit var view: SettingsView
@@ -35,8 +35,17 @@ class SettingsPresenterTest {
     }
 
     @Test
+    fun initView() {
+        sut.initView()
+
+        verify(view).setMaxSizePositions(5, 5)
+        verify(view).setColumnsCount(0, 4)
+        verify(view).setRowsCount(1, 5)
+    }
+
+    @Test
     fun setColumnsCountProgress_oldValue() = runBlockingTest {
-        sut.setColumnsCountProgress(1)
+        sut.setColumnsCountProgress(0)
 
         verify(view, never()).setColumnsCount(any(), any())
         verify(settingsWorker, never()).save(any(), any())
@@ -63,6 +72,6 @@ class SettingsPresenterTest {
         sut.setRowsCountProgress(2)
 
         verify(view).setRowsCount(2, 6)
-        verify(settingsWorker).save(SchulteTableSettings(5, 6), SettingType.RowsCount)
+        verify(settingsWorker).save(SchulteTableSettings(4, 6), SettingType.RowsCount)
     }
 }

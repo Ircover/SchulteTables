@@ -38,7 +38,7 @@ class GamePresenter @Inject constructor(private val game: SchulteTableGame,
                                         private val settingsWorker: SchulteTableSettingsWorker,
                                         private val clickCellUseCase: ClickCellUseCase,
                                         private val saveResultUseCase: SaveResultUseCase,
-                                        dispatchersProvider: DispatchersProvider)
+                                        private val dispatchersProvider: DispatchersProvider)
         : MvpPresenter<GameView>(), SchulteTableCallback {
     private var needToRefresh = true
     init {
@@ -82,7 +82,7 @@ class GamePresenter @Inject constructor(private val game: SchulteTableGame,
     }
 
     override fun click(cell: SchulteTableCell) {
-        presenterScope.launch {
+        presenterScope.launch(dispatchersProvider.main()) {
             if(!clickCellUseCase.execute(game, cell)) {
                 viewState.notifyWrongCell()
             }
@@ -90,7 +90,7 @@ class GamePresenter @Inject constructor(private val game: SchulteTableGame,
     }
 
     private fun refreshGame() {
-        presenterScope.launch {
+        presenterScope.launch(dispatchersProvider.main()) {
             game.refresh(generateTableUseCase.execute())
         }
     }

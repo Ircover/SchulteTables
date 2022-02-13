@@ -25,7 +25,7 @@ interface ScoresView : MvpView {
 @ActivityScope
 class ScoresPresenter @Inject constructor(private val scoresRepository: SchulteTableScoresRepository,
                                           private val settingsWorker: SchulteTableSettingsWorker,
-                                          private val dispatchersProvider: DispatchersProvider
+                                          dispatchersProvider: DispatchersProvider
 )
     : MvpPresenter<ScoresView>() {
 
